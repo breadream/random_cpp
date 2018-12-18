@@ -22,6 +22,10 @@ public:
                 if (word1[i-1] == word2[j-1]) 
                     table[i][j] = table[i-1][j-1];
                 else  // if not same, we need another edit for words. IE: add 1
+				// So comparing "k" to "s", we first want to check 
+				// what the minimum solution of the previous strings were 
+				// (' ' vs ' ', ' ' vs 'k', ' ' vs 's' ). 
+				// We see that the minimum prior solution is in the diagonal of our table.
                 {
                     int left = table[i][j-1];
                     int up   = table[i-1][j];
