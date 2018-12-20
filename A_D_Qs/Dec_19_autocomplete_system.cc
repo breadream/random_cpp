@@ -1,19 +1,17 @@
 class AutocompleteSystem {
-    
     class TrieNode{
-        public:
+    public:
             unordered_map<char, TrieNode*> child;
             string str;
             int count;
-            TrieNode(): str(""), count(0) {}
+            TrieNode(): str(""), count(0) {} // TrieNode constructor
     };
-    
     void insert(string& s, TrieNode* root, int times){
         TrieNode* curr = root;
         for (int i=0;i<s.size();i++){
             if (!curr->child.count(s[i]))
-                curr->child[s[i]] = new TrieNode();
-            curr = curr->child[s[i]];
+                curr->child[s[i]] = new TrieNode(); // create a node for starting position
+            curr = curr->child[s[i]]; // go down to that character
         }
         curr->count += times;
         curr->str = s;
@@ -21,11 +19,10 @@ class AutocompleteSystem {
     
 public:
     void dfs(TrieNode* temp){
-        if (temp->str != "") q.push({temp->str, temp->count});
-        
-        for (auto& ele: temp->child){
-            dfs(ele.second);
-        }
+        if (temp->str != "") 
+            q.push(make_pair(temp->str, temp->count));
+        for (const auto& elemenet: temp->child)
+            dfs(element.second);
     }
     
     struct comp{
@@ -34,17 +31,15 @@ public:
         }
     };
     
-    priority_queue<pair<string, int>, vector<pair<string, int> >, comp> q;
+    priority_queue<pair<string, int>, vector<pair<string, int>>, comp> q;
         
     TrieNode* root, *curr;
     AutocompleteSystem(vector<string> sentences, vector<int> times) {
         root = new TrieNode();
-        for (int i=0;i<sentences.size();i++){
+        for (int i=0;i<sentences.size();i++)
             insert(sentences[i], root, times[i]);
-        }
         curr = root;
     }
-    
     
     string s="";
     vector<string> input(char c) {
@@ -63,10 +58,7 @@ public:
             return {};
         }
         
-        if (curr->str != "") q.push({curr->str, curr->count});
-        for (auto& ele: curr->child){
-            dfs(ele.second);
-        }
+        dfs(curr);
         
         vector<string> res;
         while (!q.empty() && res.size()<3){
