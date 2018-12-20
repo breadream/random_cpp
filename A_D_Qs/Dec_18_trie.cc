@@ -18,7 +18,7 @@ struct Trie
 	void insert(const char* array)
 	{
 		if (*key == '\0')
-			finish = true; // mark the end of each string
+			finish = true; // mark the end of each string // as a left node
 		else 
 		{
 			int curr = *key - 'A';

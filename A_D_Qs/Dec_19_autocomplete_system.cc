@@ -1,72 +1,81 @@
 class AutocompleteSystem {
-    class TrieNode{
-    public:
-            unordered_map<char, TrieNode*> child;
+    class TrieNode 
+    {
+        public:
+            unordered_map <char, TrieNode*> child;
             string str;
             int count;
-            TrieNode(): str(""), count(0) {} // TrieNode constructor
+        TrieNode(): str(""), count (0) {} // TrieNode constructor
     };
-    void insert(string& s, TrieNode* root, int times){
+    
+    void insert(string& s, TrieNode* root, int times)
+    {
         TrieNode* curr = root;
-        for (int i=0;i<s.size();i++){
-            if (!curr->child.count(s[i]))
-                curr->child[s[i]] = new TrieNode(); // create a node for starting position
-            curr = curr->child[s[i]]; // go down to that character
+        for (int i = 0; i < s.length(); i++)
+        {
+            if (!curr->child.count(s[i])) // nullptr? 
+                curr->child[s[i]] = new TrieNode(); // starting position ? create a new node for that character
+            curr = curr->child[s[i]]; // go down one level 
         }
-        curr->count += times;
+        // after we reach the end of string node, store the string itself and count (times)
         curr->str = s;
+        curr->count = times;
     }
-    
 public:
-    void dfs(TrieNode* temp){
-        if (temp->str != "") 
-            q.push(make_pair(temp->str, temp->count));
-        for (const auto& elemenet: temp->child)
-            dfs(element.second);
-    }
-    
-    struct comp{
-        bool operator() (pair<string, int>& a, pair<string, int>& b){
-            return a.second<b.second || a.second==b.second && a.first>b.first;
+    struct comp
+    {
+        bool operator() (pair<string, int>& A ,pair<string, int>& B)
+        {
+            return  A.second <= A.second && A.first > A.first;
         }
     };
     
-    priority_queue<pair<string, int>, vector<pair<string, int>>, comp> q;
-        
-    TrieNode* root, *curr;
+    TrieNode *root, *curr;
+    priority_queue <pair<string, int>, vector<pair<string, int>>, comp> q;
+    
     AutocompleteSystem(vector<string> sentences, vector<int> times) {
         root = new TrieNode();
-        for (int i=0;i<sentences.size();i++)
-            insert(sentences[i], root, times[i]);
+        for (int i = 0; i < sentences.size(); i++)
+            insert(sentences[i], root, times[i]); // insert all sentences 
         curr = root;
     }
     
-    string s="";
+    string prefix = "";
     vector<string> input(char c) {
-        q = priority_queue<pair<string, int>, vector<pair<string, int> >, comp>();
-        if (c=='#'){
-            insert(s, root, 1);
-            s="";
-            curr = root; //start searching from the beginning node for the next sentence
+        q = priority_queue <pair<string, int>, vector<pair<string, int>>, comp> ();
+        if (c == '#') // the user finished the input
+        {
+            insert(prefix, root, 1);
+            prefix = ""; 
+            curr = root; // start to search from the beinning node in the next sentence  
             return {};
         }
-        s += c;
-        if (curr && curr->child.count(c)){
+        prefix += c;
+        if (curr && curr->child.count(c)) // if child node contains next character, go to that node 
             curr = curr->child[c];
-        }else{
-            curr = NULL; //curr node is null so empty result for any further characters in current input 
+        else // no character found? 
+        {
+            curr = nullptr; // empty result for any further characters in current input
             return {};
         }
         
-        dfs(curr);
+        dfs (curr);
         
         vector<string> res;
-        while (!q.empty() && res.size()<3){
-            res.push_back(q.top().first);
+        while (!q.empty() && res.size() < 3) // we need top 3 hot sentences 
+        {
+            res.emplace_back(q.top().first);
             q.pop();
         }
-        
         return res;
+    }
+    
+    void dfs (TrieNode* temp)
+    {
+        if (temp->str != "")  // if it has a sentence, push it to the queue 
+            q.push(make_pair(temp->str, temp->count));
+        for (const auto & element : temp->child) // search in DFS manner
+            dfs(element.second);
     }
 };
 
