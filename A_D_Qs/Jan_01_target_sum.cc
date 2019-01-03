@@ -39,3 +39,37 @@ int targetSum(const vector<int>& nums, int target, int i, int sum, unordered_map
 	cache[i].insert({sum, returnValue});
 	return returnValue;
 }
+
+// Bottom up approach
+int targetSum (const vector<int>& nums, int target)
+{
+	// Cache has to ragne from -sum(nums) to +sum(nums)
+	// so we need to offset everything by sum
+	int sum = 0;
+	for (int num : nums)
+		sum += num;
+	// combination of adding and subtracting the first i numbers
+	vector<vector<int>> cache (nums.size()+1, vector<int>(2*num+1, 0));
+	if (sum == 0)
+		return 0;
+	// baseline; i = 0, target = 0;; there's one way to have sum = 0 (there's no element) 
+	cache[0][sum] = 1;
+
+	// Start from deciding to add the first element as positive or negative
+	for (int i = 1; i <= nums.size(); i++)
+		for (int j = 0; j < 2*sum+1; j++)
+		{
+			int prev = cache[i-1][j]; 
+			// if current sum (j - sum) is already reached by the previous searched numbers
+			if (prev != 0)
+			{
+				cache[i][j - nums[i-1]] += prev;
+				cache[i][j + nums[i-1]] += prev;
+			}
+		}
+	return cache[nums.size()][sum + target];
+
+}
+
+
+
