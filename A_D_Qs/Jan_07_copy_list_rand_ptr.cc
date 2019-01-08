@@ -1,4 +1,4 @@
-/*
+/**
  * Definition for singly-linked list with a random pointer.
  * struct RandomListNode {
  *     int label;
@@ -9,41 +9,42 @@
 class Solution {
 public:
     RandomListNode *copyRandomList(RandomListNode *head) {
-        RandomListNode *cur = head, *cur_clone = nullptr, *head_clone= nullptr;
-    
-        if (!cur)
-            return nullptr;     
+        RandomListNode *curr = head, *curr_copy = nullptr, *res = nullptr;
+        if (!curr)
+            return nullptr;
         
-        while (cur != nullptr)
+        // make a copy of each node and append it its original node     
+        // 1 -> 2 -> 3 -> 4 ...  1 -> 1' -> 2 -> 2' -> 3 -> 3' -> 4 -> 4'
+        while (curr)
         {
-            cur_clone = new RandomListNode(cur->label); 
-            cur_clone->next = cur->next;
-            cur->next = cur_clone;
-            cur = cur_clone->next;
+            curr_copy = new RandomListNode(curr->label); // make a node
+            curr_copy->next = curr->next; // the next of copied node is current node's next
+            curr->next = curr_copy; // create a link between current and its copy
+            curr = curr_copy->next; // set the next original node as current nocde
         }
         
-        cur = head;
-        while (cur != nullptr)
+        curr = head; // reset the current node as head
+        // create a link to random node using the original nodes' random  
+        while (curr)
         {
-            cur_clone =cur->next;
-            if (cur->random)
-                cur_clone->random = cur->random->next;
-            cur = cur_clone->next;
+            curr_copy = curr->next; // point to 1' instead of 1
+            if (curr->random) // check if random pointer of original node is valid
+                curr_copy->random = curr->random->next; /* caution */ // it's next of random pointer instead of random itself
+            curr = curr_copy->next;
         }
         
-        
-        cur = head;
-        head_clone = head->next;
-        
-        while (cur != nullptr)
+        curr = head;
+        res = head->next; 
+        while (curr)
         {
-            cur_clone = cur->next;
-            cur->next = cur_clone->next;
-            cur = cur->next;
-            if (cur)
-                cur_clone->next = cur->next;
+            curr_copy = curr->next; // 1'
+            curr->next = curr_copy->next; // connect to 'original' next node
+            curr = curr->next; // advance pointer to the next node
+            if (curr)
+                curr_copy->next = curr->next; // connect copied nodes
         }
-        return head_clone;
+        
+        return res;
     }
        
 };
