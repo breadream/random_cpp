@@ -21,6 +21,16 @@ public:
         sort(starts.begin(), starts.end());
         sort(ends.begin(), ends.end());
         
+        while (s_ptr < starts.size())
+        {
+            if (starts[s_ptr] >= ends[e_ptr])
+            {
+                rooms--;
+                e_ptr++;
+            }
+            rooms++;
+            s_ptr++;
+        }
         
         return rooms;
     }
