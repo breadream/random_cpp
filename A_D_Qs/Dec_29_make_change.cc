@@ -31,10 +31,11 @@ int coinChange(vector<int>& coins, int amount, vector<int>& cache)
 
 int coinChange (vector<int>& coins, amount)
 {
-	vector<int> cache(amount.size()+1, -1);
+	vector<int> cache(amount+1, -1);
+	cache[0] = 0; // 0 ways to make amount of 0
 	for (int i = 1; i <= amount; i++)
 	{
-		int minCoins = INT_MAX;
+		int minCoins = INT_MAX; 
 		// Try removing each coin from the total
     	// and see which requires the fewest
     	// extra coins
