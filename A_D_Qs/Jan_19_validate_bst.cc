@@ -9,16 +9,23 @@
  */
 class Solution {
 public:
-    bool isValidBST(TreeNode* root) {
-        return isValidBST(root, numeric_limits<long>::min(), numeric_limits<long>::max());
-    }
-private:
-    bool isValidBST(TreeNode* root, long min, long max)
+    bool isValidBST(TreeNode* root) 
     {
-        if (!root)
+        return isValidBST(root, nullptr, nullptr);
+    }
+private:    
+    // min node -> has lower limit , max node -> has upper limit
+    bool isValidBST(TreeNode* root, TreeNode* minNode, TreeNode* maxNode) 
+    {
+        // if it reaches the end node, return true
+        if (!root)  
             return true;
-        if (root->val <= min || max <= root->val)
+        // check the value whether it is in range between min and max 
+        if (minNode && root->val <= minNode->val || maxNode && root->val >= maxNode->val)
             return false;
-        return isValidBST(root->left, min, root->val) && isValidBST(root->right, root->val, max);
+        
+        // check whether left subtree is BST or not (upper limit = current)
+        // check whether right subtree is BST or not (lower limit = current) 
+        return isValidBST(root->left, minNode, root) && isValidBST(root->right, root, maxNode);
     }
 };
