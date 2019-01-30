@@ -1,31 +1,25 @@
 class Solution {
 public:
-    int findCircleNum(vector<vector<int>>& M) {
-        if (M.empty()) 
-            return 0;
-        int count = 0;
-        vector <bool> visited (M.size()+1, false);
-        for (int i = 0; i < M.size(); i++)
-            if (dfs(M, visited, i))
-                count++;        
-        return count;
+    int findCircleNum(vector<vector<int>>& M) 
+    {
+        int circles = 0;
+        for (int s = 0; s < M.size(); s++) // s = student
+            // every time we see a new student, increment the number of circles and explore current student
+            if (M[s][s]) 
+            {
+                circles++; 
+                explore (s, M);
+            }
+        return circles;
     }
 private:
-    bool dfs(vector<vector<int>>& M, vector<bool>& visited, int i)    
+    void explore (int s, vector<vector<int>>& M)
     {
-        if (visited[i]) // if visited, return false
-            return false;
-        stack <int> st;
-        st.push(i); // push the current source node
-        while (!st.empty())
-        {
-            i = st.top();
-            st.pop();
-            visited[i] = true;
-            for(int j = 0; j < M.size(); j++)
-                if (M[i][j] == 1 && !visited[j])
-                    st.push(j);     
-        }
-        return true;
+        if (!M[s][s])
+            return; 
+        M[s][s] = 0;
+        for (int f = 0; f < M[s].size(); f++)
+            if (M[s][f] == 1) // explore current student's friend 
+                explore(f, M);
     }
 };
