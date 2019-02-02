@@ -17,12 +17,10 @@ public:
     {
         if (!root)
             return;
-        else 
-        {
-            pq.push(root->val);
-            iterator(root->left);
-            iterator(root->right);
-        }
+
+		iterator(root->left);
+		pq.push(root->val);
+		iterator(root->right);
     }
     /** @return the next smallest number */
     int next() {
