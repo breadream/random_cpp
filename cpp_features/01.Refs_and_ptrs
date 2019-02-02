@@ -1,0 +1,32 @@
+References & pointers both refer to some other target object
+Key differences
+- a pointer; a separate variable
+- a reference; an alias to its target
+
+* obtaining values
+
+-- when a pointer's value is obtained, we receive the address of its target 
+   To get the value of the target of 'ptr', dereference is needed '*ptr'
+
+-- when a reference's value is obtained, the dereferencing is executed 
+   automatically by the compiler and target's value can be accessed immediately
+   To obtain the address of 'ref', the address-of operator is need '&ref' 
+
+
+
+
+* Assignment
+
+-- A pointer can be assigned an address of a different target and also can be 
+   assigned to nullptr to make the pointer not to point any object.
+   Since a pointer is a variable, it has an address of its own, which can be 
+   assiged to another variable
+   int var = 10;
+   int *ptr = &var;
+   *ptr = 20;
+   int **ptr = &ptr;
+   **ptr = 30;
+
+ -- A reference can only be initialized, but not assigned because assignment to 
+    a reference means assignment to the original object it refers to
+
