@@ -4,3 +4,32 @@ Three commonly used pointer types
   when it is appropriate so that there's no memory/resource leak.
 	-- unique_ptr: destroys the object when the variable goes out of scope. 
 		           Ownership can be transferred to another unique_ptr 
+				   e.g. when passing by value to a function. only one pointer referring to an object
+	-- shared_ptr: is freely copyable so that many variables can refer to the same 
+				   object. Keeps track of the reference count and destorys the object 
+				   when it is no longer in use
+	-- weak_ptr: refers to an object which is held by a shared_ptr but does not
+				 participate in reference counting so the object may be destroyed 
+				 even if a weak_ptr refers to it. 
+				 A weak-point is needed to solve the problem of reference cycles
+				 - if shared_ptr A points to B and shared_ptr B points to A,
+				 then neither will ever be destroyed
+
+/****/
+struct Cycle1 {
+	shared_ptr<Cycle2> next;
+};
+
+struct Cycle2 {
+	shared_ptr<Cycle1> next; 
+};
+
+auto head = make_shared<Cycle1>(); // head's reference count is now 1
+auto tail = make_shared<Cycle2>(); // tail's reference count is now 2
+head->next = tail; // tail's ref count is now 2
+tail->next = head; // head's ref count is now 2 
+// On destruction of head and tail, the ref counts go to 1 and stay there
+-- if head and tail go out of scope the ref counts decrease by 1 and stay as it is
+-- this could cause a leak because they can only be destroyed when their ref counts become 0
+-- we can fix this leak by declaring tail to be of type weak_ptr<Cycle2>
+weak_ptr<Cycle2> tail; 
