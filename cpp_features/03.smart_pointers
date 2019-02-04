@@ -1,0 +1,6 @@
+Three commonly used pointer types 
+- A smart pointer is a class which encapsulates an actual pointer to a dynamically 
+  allocated object, keeps track of its usage, and ensures that memory is deallocated 
+  when it is appropriate so that there's no memory/resource leak.
+	-- unique_ptr: destroys the object when the variable goes out of scope. 
+		           Ownership can be transferred to another unique_ptr 
