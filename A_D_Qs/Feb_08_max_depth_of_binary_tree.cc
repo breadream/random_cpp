@@ -11,20 +11,6 @@ class Solution {
 public:
     int maxDepth(TreeNode* root) 
     {
-        return !root ? 0 : dfs (root, 0);
-    }
-    
-    int dfs (TreeNode* root, int depth)
-    {
-        int left = 0, right = 0;
-        if (!root) 
-            return depth;
-        else
-        {
-            depth++;
-            left = dfs (root->left, depth);
-            right = dfs (root->right, depth);
-        }
-        return max(left, right);
+        return !root ? 0 : max(1 + maxDepth(root->left), 1 + maxDepth(root->right));
     }
 };
