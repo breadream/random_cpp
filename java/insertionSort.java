@@ -1,5 +1,5 @@
 void insertionSort (int arr[]) {
-	int n = arr.length-1; // not to be out of bound 
+	int n = arr.length-1; // to avoid index i to be out of bound
 	// j is initialized as increased i 
 	for (int i = 0, j = i; i < n; j = ++i) {
 			int key = a[i + 1]; // starting with one position ahead 
