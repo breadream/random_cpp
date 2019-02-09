@@ -1,4 +1,5 @@
-/* KMP (Knuth Morris Pratt) algorithm  (pattern matching method)
+/* https://bowbowbow.tistory.com/6?category=159621
+ * KMP (Knuth Morris Pratt) algorithm  (pattern matching method)
  * O(N + M) where N == text.length, M = pattern.length
  * (Naive approach is O(N*M))
  * -- prefix and suffix 
