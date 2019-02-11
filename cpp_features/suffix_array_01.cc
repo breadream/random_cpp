@@ -1,3 +1,4 @@
+// Naive approach; O(n^2 * lg n)
 // Structure to store information of a suffix 
 struct suffix 
 { 
