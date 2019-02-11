@@ -1,4 +1,4 @@
-/* from https://m.blog.naver.com/sorkelf/220825930008 
+/* from https://blog.naver.com/sorkelf/40127776500 
  * in advance, use emplace_back 
  * in C++0x instead of unncessary copy, we can move within memory 
  * by R-value reference
@@ -28,7 +28,8 @@ class Car
 {
 public:
 	// copy Contructor 
-	Car (const Car& car) : name(new char[car.nameLen]), nameLen(car.nameLen)
+	Car (const Car& car) 
+    :name(new char[car.nameLen]), nameLen(car.nameLen)
 	{
 		memcpy(name, car.name, car.NameLen);
 	}
@@ -49,8 +50,10 @@ public:
 	}
 	
 	// move contructor
-	Car(Car&& car) : name(car.name), nameLen (car.nameLen)
+	Car(Car&& car) 
+	:name(car.name), nameLen (car.nameLen) // it assigns a memory address unlike copy contructor 
 	{
+		// to avoid destroing memory, nullptr is assigned to an object
 		car.name = nullptr;
 		car.nameLen = 0;
 	}
@@ -77,3 +80,4 @@ private:
 
 /* why there would be performance improvement
  * move semantics 'move' on memory instead of copying */
+// std::move() -> type cast L-value to R-value, and call move assignment constructor 
