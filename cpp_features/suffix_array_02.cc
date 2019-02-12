@@ -56,7 +56,46 @@
  * of length 4, we need to compare last 2 substring in each substing of 4, 
  * when comparing strings " ss'is' " and " ss'ip' ", we just need to compare
  * already calculated g[index]
+ * so if g[x] == g[y] and there's already g[index] for length t,
+ * we can simply compare g[x+t] = g[y+t]
  *
  * */
  
+#include <iostream>
+#include <string>
+#include <cstring>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+// gn = group number, new_gn = new group number
+vector<int> suffix, gn, new_gn;
+
+vector<int> getSuffix(const string &s)
+{
+	int n = s.size();
+	suffix.resize(n); gn.resize(n+1); new_gn.resize(n+1);
+	for (int i = 0; i < n; i++)
+	{
+		suffix[i] = i;
+		gn[i] = s[i];
+	}
+	gn[n] = -1;
+
+	for (int t = 1; t < n; t <<= 1)
+	{
+		auto cmp = [&] (int i, int j) {
+			if (g[i] == g[j])
+				return g[i+t] < g[j+t];
+			else 
+				return g[i] < g[j];
+		};
+		sort(suffix.begin(), suffix.end(), cmp);
+		new_gn[suffix[0]] 
+	}
+	
+
+	
+
+}
 
