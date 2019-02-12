@@ -30,20 +30,25 @@ vector<int> getSuffix(const string & s)
 	int n = s.size();
 	vector<psi> v;  // vector of string, int pair
 	for (int i = 0; i < n; i++)
-		v.emplace_back(psi(s.substr(i), i));
-	sort(v.begin(), b.end()); // sorted by v[i].first as the default 
-	// but if you want to sort it by its v[i].second
-	/*
+		v.emplace_back(psi(s.substr(i), i)); // s.substr(i)-> get the substring from i to the end 
+
+	sort(v.begin(), v.end()); // sorted by v[i].first (lexicographic order) as the default 
+
+	/* 
+	 * but if you want to sort it by its v[i].second
 	 * sort(v.begin(), v.end(),
 	 * 		[](const pair<string, int> & a, const pair<string, int> & b) -> bool
 	 * 		{
 	 * 			return a.second < b.second;
 	 * 		});
-	 * 	or make a bool function and put it as the last element in sort()
-	 * 		*/
+	 * or make a bool function and put it as the last element in sort()
+	 *
+	 * */
+
 	vector<int> ans;
 	for (int i = 0; i < n; i++)
 		ans.emplace_back(v[i].second);
+	return ans;
 }
 
 int main ()
