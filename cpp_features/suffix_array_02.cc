@@ -68,19 +68,19 @@
 #include <vector>
 
 using namespace std;
-// gn = group number, new_gn = new group number
-vector<int> suffix, gn, new_gn;
+//g = group number, new_g = new group number
+vector<int> suffix, g, ng;
 
 vector<int> getSuffix(const string &s)
 {
 	int n = s.size();
-	suffix.resize(n); gn.resize(n+1); new_gn.resize(n+1);
+	suffix.resize(n); g.resize(n+1); ng.resize(n+1);
 	for (int i = 0; i < n; i++)
 	{
 		suffix[i] = i;
-		gn[i] = s[i];
+		g[i] = s[i];
 	}
-	gn[n] = -1;
+	g[n] = -1;
 
 	for (int t = 1; t < n; t <<= 1)
 	{
@@ -91,11 +91,29 @@ vector<int> getSuffix(const string &s)
 				return g[i] < g[j];
 		};
 		sort(suffix.begin(), suffix.end(), cmp);
-		new_gn[suffix[0]] 
+		new_g[suffix[0]];
+		new_g[n] = 1;
+		for (int i = 1; i < n; i++)
+		{
+			if (cmp(suffix[i-1], suffix[i])) 
+				new_g[suffix[i]] = ng[suffix[i-1]]+1;
+			else
+				new_g[suffix[i]] = ng[suffix[i-1]];
+		}
+		g = ng;
 	}
-	
+	return suffix;
+}
 
-	
-
+int main()
+{
+	ios::syn_with_stdio(false);
+	cin.tie(0);
+	string s;
+	cin >> s;
+	vector<int> suffix = getSuffix(s);
+	for (int i = 0; i < suffix.size(); i++)
+		printf("%d ", suffix[i]);
+	return 0;
 }
 
