@@ -3,10 +3,7 @@
  * to get its Suffix Array 
  * 
  * Let's groupify string s = "mississipi" by length 1
- * -------------------------------------
- * index	0  1  2  3  4  5  6  7  8  9
- * s[index] m  i  s  s  i  s  s  i  p  i
- * g[index] 2  1  4  4  1  4  4  1  3  1
+ * ------------------------------------- * index	0  1  2  3  4  5  6  7  8  9 * s[index] m  i  s  s  i  s  s  i  p  i * g[index] 2  1  4  4  1  4  4  1  3  1
  * -------------------------------------
  *
  * g[index] is the lexicographic order of each character 
@@ -68,46 +65,43 @@
 #include <vector>
 
 using namespace std;
-//g = group number, new_g = new group number
+//g = group number, ng = new group number
 vector<int> suffix, g, ng;
 
 vector<int> getSuffix(const string &s)
 {
 	int n = s.size();
 	suffix.resize(n); g.resize(n+1); ng.resize(n+1);
+
 	for (int i = 0; i < n; i++)
 	{
-		suffix[i] = i;
-		g[i] = s[i];
+		suffix[i] = i; 
+		g[i] = s[i]; // store s[i] as ASCII CODE
 	}
-	g[n] = -1;
+	g[n] = -1; // assign unique value 
 
 	for (int t = 1; t < n; t <<= 1)
 	{
 		auto cmp = [&] (int i, int j) {
-			if (g[i] == g[j])
-				return g[i+t] < g[j+t];
-			else 
-				return g[i] < g[j];
+			return g[i] == g[j] ? g[i+t] < g[j+t] : g[i] < g[j];
 		};
-		sort(suffix.begin(), suffix.end(), cmp);
-		new_g[suffix[0]];
-		new_g[n] = 1;
-		for (int i = 1; i < n; i++)
-		{
-			if (cmp(suffix[i-1], suffix[i])) 
-				new_g[suffix[i]] = ng[suffix[i-1]]+1;
-			else
-				new_g[suffix[i]] = ng[suffix[i-1]];
-		}
-		g = ng;
+		sort(suffix.begin(), suffix.end(), cmp); // sort the suffix array using pre-calculated g[index]
+
+		// set up new group index
+		ng[suffix[0]] = 0;
+		ng[n] = -1;
+
+		for (int i = 1; i < n; i++) // g[suffix_array] 
+			ng[suffix[i]] = cmp(suffix[i-1], suffix[i]) ? ng[suffix[i-1]]+1 : ng[suffix[i-1]];
+
+		g = ng; // update group index with new group index 
 	}
 	return suffix;
 }
 
 int main()
 {
-	ios::syn_with_stdio(false);
+	ios::sync_with_stdio(false);
 	cin.tie(0);
 	string s;
 	cin >> s;
