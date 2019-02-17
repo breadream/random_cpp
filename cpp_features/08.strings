@@ -1,0 +1,9 @@
+How C-style strings and C++ strings are different?
+- C string; not a type of its own.
+			an array of chars that ends with '\0' (null terminated)
+- C++ string; an object from the string class
+
+
+- library methods for C string don't have any concept of memory safety
+-> could cause out-of-bound access errors, memory corruption
+- C++ string methods have a much richer set of operators
