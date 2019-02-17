@@ -1,0 +1,24 @@
+In OOP, a constructor in a class is a special type of subroutine to create and prepares the new object
+It accepts arguments for setting fields, and the fields themselves could be objects, in this case
+a constructor itself can make calls to other contructors
+
+- default constructor; can be called w/o arguments 
+					   is called when an instance is created w/o initialization
+					   e.g. Foo f; // f is initialized by the default constructor
+- copy contructor; can be called with a reference to a class instance as an argument
+					   e.g. ClassName(const ClassName&)
+					-> called when a new copy of an instance needs to be initialized 
+					either explicitly as in 'ClassName new_instance(existing_instance)'
+					implicitly by compiler 
+					e.g. when there's an value passed by value to a function OR returned by value
+
+- move constructor; can be called with an rValue referenceto a class instance as an argument
+					e.g. ClassName(ClassName&&)
+					is called when a new instance is initialized from a temporary object 
+					that typically is destroyed after initialization
+					e.g. returning by value from a function / an explicit call as in 
+					ClassName new_instance(std::move(existing_instance))
+					
+					
+
+
