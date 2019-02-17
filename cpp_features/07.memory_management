@@ -1,0 +1,9 @@
+malloc() / free()  vs  new / delete 
+* Similarity; allocate space on the heap
+- malloc(); type-agnostic, allocates uninitialized memory blocks of required size
+			returns a void pointer (a generic pointer that can be pointed at any data type)
+- new; allocates a memory block required to hold an object of specific type 
+		returns a type-safe pointer
+- delete; freeing the memory / ensures the object's destructor is called
+
+

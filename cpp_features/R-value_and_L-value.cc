@@ -1,9 +1,8 @@
 /* from https://blog.naver.com/sorkelf/40127776500 
- * in advance, use emplace_back 
  * in C++0x instead of unncessary copy, we can move within memory 
  * by R-value reference
  * L-value -> an object that persists beyond a single expression 
- * R-value -> temporary value that does not persists beyond the expression that uses it 
+ * R-value -> temporary value that does not persist beyond the expression that uses it 
  * Reference using '&' is technically L-value reference 
  * R-value reference uses '&&' */
 
