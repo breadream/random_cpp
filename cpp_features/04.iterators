@@ -1,0 +1,20 @@
+How iterators and pointers are similiar and different 
+- similarity; you can deference them to get a value 
+
+- Differences 
+	- A pointer holds an address in memory 
+		- Iterator can iterate over data that's on a file system, 
+		  spread across many machines
+		  e.g. An iterator over a linked list -> iterator will move 
+		  through elements that are at nodes in the list whose addressses 
+		  in Ram may be scattered.
+
+	- Simple arithmetic can be performed on pointers 
+		- not all iterators allow these operations 
+
+	- A pointer of type T* can point to any type T object
+		- An iterator is more restricted. 
+		e.g. vector<double>::iterator -> can only refer to doubles inside a vector<double>
+
+	- An iterator refers to objects in a container, there's no concept of
+	  'delete' for an iterator
