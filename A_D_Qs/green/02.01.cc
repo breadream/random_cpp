@@ -70,7 +70,7 @@ void removeDuplicates1( Node * head ) {
 	Node * prev = head;
 	Node * curr = head->next;
 	set.insert(head->data);
-	while(curr) 
+	while(curr)
 	{
 		// while curr is valid and its data is already in the set
 		// we skip those nodes 
@@ -89,6 +89,7 @@ void removeDuplicates1( Node * head ) {
 
 int main() {
 	Node * head1 = nullptr;
+	for (int i = 0; i < 10; i++)
 		insert(head1, random_range(1,8));
 	printList(head1);
 	removeDuplicates1(head1);
