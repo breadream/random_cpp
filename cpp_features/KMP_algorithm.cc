@@ -70,7 +70,7 @@
  * index 	0  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17
  * text     A  B  A  B  A  B  A  B  B  A  B  A  B  A  B  A  B  C
  * pattern 		 	   'A  B  A  B' A  B  A  B  C			   
- *                                 (j) -> by using pi[3] = 4,
+ *                                 (j) -> by using pi[3] = 2,
  *                                 move the pattern to compare i with j of 2 
  *
  *
