@@ -1,0 +1,3 @@
+If you want to represent N bit number K into negative (-K)
+"concat(1, 2^(N-1) - k)" 
+-3 in 4bit ->  concat(1, 2^3-3) =  1 101 (2)
