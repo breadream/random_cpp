@@ -6,23 +6,16 @@ int partition(vector <int> &list, int left, int right){
   high = right + 1;
   pivot = list[left]; // pivot; leftmost element 
 
-  do{
-    do {
-      low++; // low starts at 'left+1'
-    } while (low<=right && list[low]<pivot);
 
-    do {
-      high--; //high starts at 'right'
-    } while (high>=left && list[high]>pivot);
-
-    // if low and high don't intersect,  swap list[low] & list[high] 
-    if(low<high)
-		swap(list[low], list[high]);
-    
-  } while (low<high);
-
-  // if low and high intersect, swap list[left] & list[high]
-	swap(list[low], list[high]);
+  while (low < high)
+  {
+	  while (low <= right && list[low] < pivot) low++
+	  while (high >= left && list[high] > pivot) high--;
+	  // if low and high don't intersect, swap them each other
+	  if (low < high) swap(list[low], list[high]);
+  }
+  // if low and high intersect, swap list[left], list[high]
+  swap(list[low], list[high]);
 
   // return the current pivot index 
   return high;
