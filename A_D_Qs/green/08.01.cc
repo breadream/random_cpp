@@ -18,7 +18,6 @@ int countWays(int n, vector<int>& memo)
 	return memo[n];
 }
 
-// iterative approach
 int countWays (int n, const vector<int>& steps)
 {
 	if (n == 0)
@@ -26,9 +25,21 @@ int countWays (int n, const vector<int>& steps)
 
 	int sum = 0;
 
-	for (const int & i : steps)
+	for (const int i : steps)
 		if (n >= i)
 			sum += countWays(n-i, steps);
 
 	return sum;
+}
+
+int countWays (const int n)
+{
+	int dp [n+1];
+	dp[0] = 1; // 1 instead of 0 because n == 0 means we've already found a path
+	dp[1] = 1;
+	dp[2] = 2;
+	for (int i = 3; i <= n; i++)
+		dp[i] = dp[i-1] + dp[i-2] + dp[i-3];
+
+	return dp[n];
 }
