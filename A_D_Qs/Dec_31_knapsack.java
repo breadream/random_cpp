@@ -39,7 +39,7 @@ private int knapsack(Item[] items, int W, int i) {
 //       2  [0   6  10]  // if we choose 'only' the second item to be included, 
 //       				 // but we need to subtract the weight of that item (in the previous row cuz don't want to include the same item second time)
 //       				 // Math.max (cache[i-1][j] <- previous item; '6' in this case
-//       				 			  cache[i-1][j-weights[i-1]] + vals[i-1] <- cache[0][2-weights[0]] = '0' + '10');
+//       				 			  cache[i-1][j-weights[i-1]] + vals[i-1] <- cache[1][2-weights[1]] = '0' + '10');
 //
 
 //O (n * W)
@@ -55,6 +55,6 @@ public int knapsack(int W, int[] weights, int[] vals) {
 									   cache[i-1][j - weights[i-1]] + vals[i-1]); // subtract the weight of current item to get the remaining max val
 		}
 	}
+	return cache[weight.length][W];
 }
-
 	
