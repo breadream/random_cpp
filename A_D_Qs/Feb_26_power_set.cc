@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <iomanip>
+#include <cmath>
+
 using namespace std;
 
 // Function to print given set
@@ -30,6 +32,24 @@ void findPowerSet(const vector<int> &S, vector<int> &set, int n)
 	findPowerSet(S, set, n-1);
 }
 
+void findPowerSet(const vector<int>& S, int n)
+{
+	// N = total number of subsets
+	int N = pow (2, n);
+	
+	for (int i = 0; i < N; i++)
+	{
+		// check each bit in N 
+		for (int j = 0; j < n; j++)
+		{
+			if (i & (1 << j))
+				cout << S[j] << " ";
+		}
+		cout << endl; 
+	}
+}
+
+
 // main function
 int main()
 {
@@ -39,6 +59,7 @@ int main()
 	vector<int> set;
 
 	findPowerSet(S, set, n);
+	findPowerSet(S, n);
 
 	return 0;
 }
