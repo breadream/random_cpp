@@ -21,13 +21,13 @@ void findPowerSet(const vector<int> &S, vector<int> &set, int n)
 		return;
 	}
 
-	// consider nth element
-	set.push_back(S[n - 1]);
-	findPowerSet(S, set, n - 1);
+	// consider current element 
+	set.emplace_back(S[n-1]);
+	findPowerSet(S, set, n-1);
 
-	// or don't consider nth element
+	// OR just don't consider current element 
 	set.pop_back();
-	findPowerSet(S, set, n - 1);
+	findPowerSet(S, set, n-1);
 }
 
 // main function
