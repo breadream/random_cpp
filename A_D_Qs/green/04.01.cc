@@ -2,7 +2,6 @@
 #include <list>
 #include <vector>
 
-
 using namespace std;
 
 class Graph 
@@ -16,9 +15,9 @@ private:
 	list <int> *adj; // pointer to an array containing adjacency lists
 };
 
-Graph::Graph(int V) 
+Graph::Graph(int v) 
 {
-	this->V = V;
+	V = v;
 	adj = new list<int> [V]; // each vertex has an individual adj list 
 }
 
