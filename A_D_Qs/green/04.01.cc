@@ -2,16 +2,18 @@
 #include <list>
 #include <vector>
 
+
 using namespace std;
 
 class Graph 
 {
-	int V; // number of vertices 
-	list <int> *adj; // pointer to an array containing adjacency lists
 public:
 	Graph(int V); // Constructor
 	void addEdge (int v, int w); // to add an edge to graph
 	bool isReachable(int s, int d); // check whether if there's route between two nodes
+private:
+	int V; // number of vertices 
+	list <int> *adj; // pointer to an array containing adjacency lists
 };
 
 Graph::Graph(int V) 
