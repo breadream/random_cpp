@@ -28,14 +28,16 @@
 //}
 
 
-/* make cnt array itself also have the meaning of index 
- * 
- * *
- */
+/* make cnt array itself also have the meaning of index */
 #include <cstdio>
 #include <vector>
 #include <cassert>
 typedef pair<int, int> pii;
+vector<int> sort (const vector<int>& v)
+{
+	int n = v.size();
+	vector<int> cumulCnt (n+1, 0);
+}
 vector<pii> sort (const vector<pii> &v)
 {
 	int n = v.size();
