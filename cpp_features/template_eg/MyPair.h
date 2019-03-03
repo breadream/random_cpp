@@ -1,30 +1,31 @@
-template<typename T>
+#pragma once 
+template<typename T, typename U>
 class MyPair
 {
 public:
 	const T& GetFirst() const;
-	const T& GetSecond() const;
-	MyPair (const T& first, const T& second);
+	const U& GetSecond() const;
+	MyPair (const T& first, const U& second);
 
 private:
 	T mFirst;
-	T mSecond;
+	U mSecond;
 };
 
-template<typename T>
-const T& MyPair<T>::GetFirst() const
+template<typename T, typename U>
+const T& MyPair<T, U>::GetFirst() const
 {
 	return mFirst;
 }
 
-template<typename T>
-const T& MyPair<T>::GetSecond() const
+template<typename T, typename U>
+const T& MyPair<T, U>::GetSecond() const
 {
 	return mSecond;
 }
 
-template<typename T>
-MyPair<T>::MyPair(const T& first, const T& second)
+template<typename T, typename U>
+MyPair<T, U>::MyPair(const T& first, const U& second)
 	: mFirst(first)
 	, mSecond(second)
 {
