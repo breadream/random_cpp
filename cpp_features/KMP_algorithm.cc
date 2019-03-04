@@ -1,3 +1,4 @@
+
 /* https://bowbowbow.tistory.com/6?category=159621
  * KMP (Knuth Morris Pratt) algorithm  (pattern matching method)
  * O(N + M) where N == text.length, M = pattern.length
@@ -88,48 +89,71 @@
  *                                    (j) -> == 0 
  * */
 
-vector<int> kmp(string s, string p){
-    vector<int> ans;
-    auto pi = getPi(p);
-    int n = s.size(), m = p.size(), j = 0;
+#include <iostream>
+#include <vector>
 
-    for(int i = 0 ; i < n ; i++)
+using namespace std; 
+
+vector<int> makeTable (const string& pattern){
+    int patternSize = pattern.size();
+	int j = 0;
+    vector<int> table (patternSize, 0);
+
+    for(int i = 1; i < patternSize; i++)
 	{
-		/* skip over the intermediate part 
-		 * while statement was used instead of if
-		 * because we want to pass as many as chars 
-		 * by using given information */
-        while(j > 0 && s[i] != p[j])  // i is stable only j changes
-            j = pi[j-1]; // j is altered by pi array 
+        while(j > 0 && pattern[i] != pattern[j]) // if i-th pattern and j-th pattern don't match
+            j = table[j-1];
+        if(pattern[i] == pattern[j]) // if they match, increment j
+            table[i] = ++j;
+    }
+    return table;
+}
 
-        if(s[i] == p[j])
+vector<int> KMP(string text, string pattern){
+	vector<int> table = makeTable(pattern);
+    vector<int> ans;
+
+    int textSize = text.size();
+	int patternSize = pattern.size();
+	int j = 0;
+
+    for(int i = 0 ; i < textSize; i++) // i is stable only j changes
+	{
+        while(j > 0 && text[i] != pattern[j]) // 'while' is used to jump all intermediate part 
+            j = table[j-1]; // j is altered by table
+
+        if(text[i] == pattern[j])
 		{
-			// j is just the comparison index
-			// so if it reaches to the length of pattern 
-			// we find the real match
-            if(j == m-1)
-                ans.push_back(i-m+1);
-                j = pi[j]; // just in case for another match
+            if(j == patternSize-1) // j (comparison index) == length of pattern --> real match
+			{
+                ans.emplace_back(i-patternSize+1);
+                j = table[j]; // just in case for another match
+			}
             else
+			{
                 j++;
+			}
         }
     }
     return ans;
 }
 
-// same technique is used in here 
-// Naive approach is O(m^3)
-// but can be reduced to O(m)
-vector<int> getPi(string p){
-    int m = p.size(), j = 0;
-    vector<int> pi(m, 0);
 
-    for(int i = 1; i < m ; i++)
-	{
-        while(j > 0 && p[i] != p[j])
-            j = pi[j-1];
-        if(p[i] == p[j])
-            pi[i] = ++j;
-    }
-    return pi;
+int main()
+{
+	string pattern = "ABAABAB";
+	vector<int> table = makeTable(pattern);
+	cout << "Checking table generator; ";
+	for (const int c : table)
+		cout << c << " "; 
+	cout << endl;
+
+	cout << "Testing KMP; ";
+	vector<int> kmpTable = KMP("ABABABABBABABABABC", "ABABABABC");
+
+	for (const int c : kmpTable)
+		cout << c << " "; 
+	cout << endl;
+
+	return 0;
 }
