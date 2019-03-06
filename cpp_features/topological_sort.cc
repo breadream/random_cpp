@@ -36,35 +36,33 @@ void Graph::addEdge(int v, int w)
 } 
 
 // A recursive function used by topologicalSort 
-void Graph::dfs(int v, bool visited[], stack<int> &stack) 
+void Graph::dfs(int node, bool visited[], stack<int> &stack) 
 { 
 	// Mark the current node as visited. 
-	visited[v] = true; 
+	visited[node] = true; 
 
-	// Recur for all the vertices adjacent to this vertex 
-	for (const auto &it = adj[v].begin(); it != adj[v].end(); ++it) 
-		if (!visited[*it]) 
+	// Recur for all the vertices adjacent to current vertex 
+	for (auto it = adj[node].begin(); it != adj[node].end(); ++it) 
+		if (visited[*it] == false) 
 			dfs (*it, visited, stack); 
 
-	// Push current vertex to stack which stores result 
-	stack.push(v); 
+	// store the finished node onto stack
+	stack.push(node); 
 } 
 
-// The function to do Topological Sort. It uses recursive 
-// topologicalSortUtil() 
 void Graph::topologicalSort() 
 { 
-	stack<int> stack; 
+	stack<int> stack; // store the reverse order that each DFS is done 
 
 	// Mark all the vertices as not visited 
 	bool *visited = new bool[V]; 
-	for (int i = 0; i < V; i++) 
-		visited[i] = false; 
+	for (int node = 0; node < V; node++) 
+		visited[node] = false; 
 
-	// Call the recursive helper function to store Topological 
-	for (int i = 0; i < V; i++) 
-		if (visited[i] == false) 
-			dfs(i, visited, stack); 
+	// recursively call DFS for unvisited node 
+	for (int node = 0; node < V; node++) 
+		if (visited[node] == false) 
+			dfs(node, visited, stack); 
 
 	// Print contents of stack 
 	while (stack.empty() == false) 
