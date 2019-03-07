@@ -5,15 +5,14 @@ string decrypt( const string& word )
    res[0] = int(word[0]);
    for(int i = 1; i < len; i++)
    {
-     int temp = (int)word[i] - (int)word[i-1];
+     int temp = word[i] - word[i-1];
      while (temp < 97)
      {
         temp += 26;       
      } 
      res[i] = temp ;
    }
-   res[0] = (int)word[0] - 1;
-   return res; 
+   res[0] = word[0] - 1;
 }
 
 int main() {
