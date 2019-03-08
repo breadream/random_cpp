@@ -1,10 +1,10 @@
 // A C++ program to print topological sorting of a DAG 
+// another approach is to use indegree
 #include<iostream> 
 #include <list> 
 #include <stack> 
 using namespace std; 
 
-// Class to represent a graph 
 class Graph 
 { 
 	int V; // No. of vertices' 
