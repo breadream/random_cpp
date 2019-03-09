@@ -3,8 +3,6 @@
 
 using namespace std;
 
-/* Returns true if the there is a subarray of arr[] with sum equal to 'sum' 
-otherwise returns false. Also, prints the result */
 void subArraySum(const vector<int>& arr, int sum) 
 { 
 	int n = arr.size();
@@ -26,11 +24,35 @@ void subArraySum(const vector<int>& arr, int sum)
 	}
 } 
 
+void subArraySum2(const vector<int>& arr, int sum) 
+{ 
+	int currSum = arr[0];
+	int start = 0; 
+	for (int end = 1; end <= arr.size(); end++)
+	{
+		// if the current sum is greater than target sum, subtract the leading arrays
+		while (currSum > sum && start < end-1)
+		{
+			currSum -= arr[start];
+			start++; // move the start ptr to right side
+		}
+		if (currSum == sum)
+		{
+			cout << "Answer: starting from " <<  start << " and end with " << end-1 << endl;
+			return;
+		}
+
+		if (end < arr.size())
+			currSum += arr[end];
+	}
+} 
+
 // Driver program to test above function 
 int main() 
 { 
 	vector<int> input = {15, 2, 4, 8, 9, 5, 10, 23}; 
 	subArraySum(input, 23);
+	subArraySum2(input, 23);
 	return 0; 
 } 
 
