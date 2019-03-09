@@ -14,7 +14,8 @@
 
 struct Node {
 	int data = 0;
-	Node * next = nullptr;
+	Node * next;
+	Node (int val) : data(val), next(nullptr);
 };
 
 /**
@@ -24,10 +25,29 @@ struct Node {
  */
 void insert( Node * & head, int data ) //  *& is used so that we can pass nullptr at the beginning 
 {
-	Node * newNode = new Node;
-	newNode->data = data;
+	Node * newNode = new Node(data);
 	newNode->next = head;
 	head = newNode;
+}
+
+void insertLast (Node * & head, int data)
+{
+	Node * temp = new Node;
+	temp->data = data;
+	temp->next = nullptr;
+
+	if (!head) // empty list 
+	{
+		head = temp;
+		return;
+	}
+	else
+	{
+		Node * last = head;
+		while (last->next)
+			last = last->next;
+		last->next = temp;
+	}
 }
 
 /**
