@@ -47,6 +47,38 @@ void subArraySum2(const vector<int>& arr, int sum)
 	}
 } 
 
+/* if the arr is     {5, 10, 2, -2, -20, 10} and want to find sum of -10
+ * cumulative sum is {5, 15, 17, 15, -5, 5}  
+ * [10, 0] 
+ * [12, 1]
+ * []
+ * */
+void subArraySum (const vector<int>& arr, int sum)
+{
+	unordered_map<int, int> map; // K, V = [currSum-sum, index]
+	int currSum = 0;
+
+	for (int i = 0; i < arr.size(); i++)
+	{
+		currSum += arr[i];
+		// sum of index 0 to i (inclusive) is equal to sum
+		if (currSum == sum)
+		{
+			cout << "Sum found between indexes " << 0 << " to " << i << endl; 
+            return; 
+		}
+		// if it is already in map,
+		// the subarray whose sum is the same value as target sum exists
+		if (map.count(currSum-sum))
+		{
+		     cout << "Sum found between indexes " << map[curr_sum - sum] + 1
+			      << " to " << i << endl;
+             return;
+		}
+		map[currSum] = i;
+	}
+}
+
 // Driver program to test above function 
 int main() 
 { 
