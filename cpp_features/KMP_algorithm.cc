@@ -96,13 +96,13 @@ using namespace std;
 
 vector<int> makeTable (const string& pattern){
     int patternSize = pattern.size();
-	int j = 0;
+	int j = 0; // index to shift table 
     vector<int> table (patternSize, 0);
 
-    for(int i = 1; i < patternSize; i++)
+    for(int i = 1; i < patternSize; i++) 
 	{
         while(j > 0 && pattern[i] != pattern[j]) // if i-th pattern and j-th pattern don't match
-            j = table[j-1];
+            j = table[j-1]; // move the pattern to the index where most recent match in pattern happened 
         if(pattern[i] == pattern[j]) // if they match, increment j
             table[i] = ++j;
     }
