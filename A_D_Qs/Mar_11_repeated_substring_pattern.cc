@@ -17,6 +17,20 @@ public:
         }
         return false;
     }
+
+    bool repeatedSubstringPattern(string s) {
+        vector<int> table(s.size(), 0);
+        for (int i = 1, j = 0; i < s.size(); i++)
+        {
+            while (j > 0 && s[i] != s[j])
+                j = table[j-1];
+            if (s[i] == s[j])
+                table[i] = ++j;
+        }
+        int mark = table[s.size()-1];
+        // table [s.size()-1] will have the most recently repeated substring index
+        return mark != 0 && s.size() % (s.size() - mark) == 0;
+    }
     
     string shiftLeft (const string & s, int len) 
     {
