@@ -1,7 +1,7 @@
 /* basic idea
- * (L) - Recursively traverse its left subtree
+ * (L) - Recursively traverse its left subtree, when this step is finished, we are back at N again 
  * (N) - Process N itself
- * (R) - Recursively traverse its right subtree
+ * (R) - Recursively traverse its right subtree, when this step is finished, we are back at N again 
  */
 
 // Recusive approach
