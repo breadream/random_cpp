@@ -34,6 +34,57 @@ void preOrder(Node* node)
 	}
 }
 
+void postOrder(Node* node)
+{
+	stack<Node*> stack;
+	stack.push(node);
+	stack<int> output;
+
+	while(!stack.empty()) 
+	{
+		curr = stack.top();
+		stack.pop();
+
+		output.push(curr->data);
+
+		if (curr->left)
+			stack.push(curr->left);
+		if (curr->right)
+			stack.push(curr->right);
+	}
+
+	while (!output.empty())
+	{
+		cout << output.top() << endl;
+		output.pop();
+	}
+}
+
+void inOrder(Node* node)
+{
+	stack<Node*> stack;
+	stack.push(node);
+
+	Node* curr = root;
+	while(!stack.empty() || curr != nullptr)
+	{
+		curr = stack.top();
+		stack.pop();
+
+		if (curr != nullptr)
+		{
+			stack.push(curr);
+			curr = curr->left
+		}
+		else
+		{
+			cout << stack.top()->data << " ";
+			stack.pop();
+			curr = curr->right;
+		}
+	}
+}
+
 Node* createMinimalBST(const vector<int>& arr, int low, int high)
 {
 	if (low > high)
