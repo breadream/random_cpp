@@ -14,18 +14,18 @@ void reverse(vector<char>& arr, int start, int end)
 vector<char> reverseWords( const vector<char>& arr ) 
 {
      vector<char> res (arr.rbegin(), arr.rend()); 
-     int i = 0, wordStart = 0; 
-     while (i < res.size()) 
+     int wordEnd = 0, wordStart = 0; 
+     while (wordEnd < res.size()) 
      {
-        i++;
-        if (i == res.size())
+        wordEnd++;
+        if (wordEnd == res.size())
         {
           reverse(res, wordStart, i-1);
         }
-        else if (res[i] == ' ')
+        else if (res[wordEnd] == ' ')
         {
           reverse(res, wordStart, i-1);
-          wordStart = i+1;
+          wordStart = wordStart + 1;
         }
      }
      return res;
