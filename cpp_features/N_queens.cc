@@ -8,7 +8,7 @@ public:
     }
     
 private:
-    void solveNQueens(vector<vector<string>>& res, vector<string> &baseRow, int row, int &colNum)
+    void solveNQueens(vector<vector<string>>& res, vector<string> &baseRow, int row, int colNum)
     {
         if (row == colNum)
         {
