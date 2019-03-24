@@ -1,8 +1,13 @@
 If you initiate a class with no methods and that doesn't inherit from another class,
 the compiler will add 4 methods to it spontaneously. These are 
+
 	- Default constructor; an empty default constructor
 	- Destructor; an empty destructor, calls the superclass destructor and 
 				  the destructor for member fields (not of primitive type)
 	- Copy constructor: a copy constructor that initializes every instance member 
 				        with a corresponding member of the constructor's argument
+	  -> allows deep copy 			
+	  -> implicit copy constructor is created when there's no specific copy constructor
+	  -> implicit copy constructor might cause memory leak
+
 	- Copy assignment operator:  
