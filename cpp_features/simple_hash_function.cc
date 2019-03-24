@@ -15,3 +15,5 @@ size_t hashStr(const char* s)
    }
    return h; // or return h % C;
 }
+
+// size_t -> a type able to represent the size of any object in bytes

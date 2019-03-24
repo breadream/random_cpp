@@ -7,7 +7,7 @@ How iterators and pointers are similiar and different
 		  spread across many machines
 		  e.g. An iterator over a linked list -> iterator will move 
 		  through elements that are at nodes in the list whose addressses 
-		  in Ram may be scattered.
+		  in RAM may be scattered.
 
 	- Simple arithmetic can be performed on pointers 
 		- not all iterators allow these operations 

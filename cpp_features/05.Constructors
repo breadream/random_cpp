@@ -5,6 +5,7 @@ a constructor itself can make calls to other contructors
 - default constructor; can be called w/o arguments 
 					   is called when an instance is created w/o initialization
 					   e.g. Foo f; // f is initialized by the default constructor
+
 - copy contructor; can be called with a reference to a class instance as an argument
 					   e.g. ClassName(const ClassName&)
 					-> called when a new copy of an instance needs to be initialized 

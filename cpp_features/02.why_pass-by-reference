@@ -1,11 +1,16 @@
 * Pass-by-reference is preferable rathr than pass-by-value but why...?
+
 - every time an object is passed by value, a new copy of it is created and passed to the function
   if a large number of object is copied, it could be an expensive operation
+
 - a class sometimes inhibits a copy being made of it 
 	e.g. by precluding the copy constructor (for deep copy) being used to clients by making it as private
+	shallow copy is done by implicit copy constructor
+
 -- Pass-by-reference -> the object itself is passed (the function gets the object's address) 
    by handling the address, the function can alter the object 
    		-- if we don't want the function to modify the object, const reference must be used
+
 - pass-by-reference can cause an unwanted implicit type conversion 
 	e.g. a derived class could be cast to base class, which hinders polymorphism 
   
