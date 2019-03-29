@@ -4,7 +4,7 @@ template <class Elem>
 class Queue
 {
 public:
-	Queue(int MaxSize)
+	Queue(int MaxSize);
 	Queue(const Queue<Elem> &otherQueue);
 	~Queue(void);
 
@@ -49,7 +49,8 @@ Queue<Elemn>::Queue(const Queue& otherQueue) :
 
 
 // Queue Destructor function 
-template <class Elem> Queue<Elem>::~Queue(void)
+template <class Elem> 
+Queue<Elem>::~Queue(void)
 {
 	delete [] Data;
 }
@@ -61,8 +62,8 @@ Queue<Elem>::Enqueue(const Elem& Item)
 	// Error Check: Make sure we aren't exceeding maximum storage space
 	assert (ElemCount < MAX_NUM);
 
-	Data[End++] = Item;
 	++ElemCount;
+	Data[End++] = Item;
 
 	// Check for wrap-around
 	if (End > MAX_NUM)

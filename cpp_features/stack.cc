@@ -11,6 +11,7 @@ public:
 	inline void Push(const Elem &Item);
 	inline Elem Pop(void);
 	inline const Elem &Peek(int depth) const;
+
 private:
 	Elem *Data; // the actual data array
 	int CurrElemNum; // the current number of elements
