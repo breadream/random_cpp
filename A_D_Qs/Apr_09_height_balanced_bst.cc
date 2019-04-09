@@ -32,7 +32,7 @@ Node* buildBalancedBST(vector<Node*> &nodes, int start, int end)
 	return root;
 }
 
-// reference to pointer-to-node
+// reference to pointer-to-node (read from right to left)
 // *& is used so that we can pass nullptr at the beginning 
 void constructBalancedBST(Node* &root)
 {

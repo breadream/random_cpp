@@ -51,3 +51,18 @@ TreeNode* inorderSuccessor(TreeNode* root, TreeNode* p)
 	}
 	return succ;
 }
+
+// recursive approach
+TreeNode* inorderSuccessor(TreeNode* root, TreeNode* p) 
+  if (!root)
+    return nullptr;
+
+  if (root->val <= p->val) 
+    return successor(root->right, p);
+   else 
+  {
+    TreeNode* left = successor(root->left, p);
+	// if left is nullptr, current root node is the inorder successor
+    return (left != nullptr) ? left : root; 
+  }
+}
