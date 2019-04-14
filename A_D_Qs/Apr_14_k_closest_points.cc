@@ -2,12 +2,10 @@
         // same as greater as compare method, resulting in ascending order
         priority_queue<vector<int>, vector<vector<int>>, compare> pq(points.begin(), points.end());
         vector<vector<int>> ret;
-        int i = 0;
-        while(i < K) 
+        for (int i = 0; i < K; i++) 
         {
             ret.push_back(pq.top());
             pq.pop();
-            i++;
         }
         return ret;
     }
