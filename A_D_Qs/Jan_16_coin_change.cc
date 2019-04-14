@@ -2,8 +2,9 @@ class Solution {
 public:
     int coinChange(vector<int>& coins, int amount) {
         // dp[i] = min coins to make up to amount i
-        vector<int> dp(amount + 1, amount+1);
+        vector<int> dp(amount + 1, amount+1); // initialize as amount+1 
         dp[0] = 0;
+
         // find the minimum number to get 1 to amount
         for (int i = 1; i <= amount; i++)
             for (int coin : coins) // try each coin
