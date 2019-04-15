@@ -17,3 +17,15 @@
              }
         return num;
     }
+
+int singleNumber(vector<int>& nums) {
+	// if we take XOR of zero and some bit, it will return that bit
+	// a ^ 0 = a
+	// if we take XOR of two same bits, it will return 0;
+	// a ^ a = 0
+
+	int num = 0;
+	for (const int i : nums)
+		num ^= i;
+	return num;
+}
